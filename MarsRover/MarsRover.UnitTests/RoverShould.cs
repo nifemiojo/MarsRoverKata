@@ -10,7 +10,7 @@ namespace MarsRover.UnitTests
         public void Not_Be_Null()
         {
             // Arrange
-            var rover = new Rover();
+            var rover = new Rover(0,0,'N');
 
             //Act
 
@@ -41,11 +41,24 @@ namespace MarsRover.UnitTests
         {
 	        var rover = new Rover(0, 0, 'N');
 
-	        var position = rover.PerformInstructions("M");
+	        rover.PerformInstructions('M');
 
-            Assert.That(position.X, Is.EqualTo(0));
-            Assert.That(position.Y, Is.EqualTo(1));
-            Assert.That(position.Heading, Is.EqualTo('N'));
+            Assert.That(rover.Position.X, Is.EqualTo(0));
+            Assert.That(rover.Position.Y, Is.EqualTo(1));
+            Assert.That(rover.Position.Heading, Is.EqualTo('N'));
+        }
+
+        
+        [Test]
+        public void Change_Heading_Direction_R()
+        {
+	        var rover = new Rover(0, 0, 'N');
+
+	        rover.PerformInstructions('R');
+
+            Assert.That(rover.Position.X, Is.EqualTo(0));
+            Assert.That(rover.Position.Y, Is.EqualTo(0));
+            Assert.That(rover.Position.Heading, Is.EqualTo('E'));
         }
 
 	}

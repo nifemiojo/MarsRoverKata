@@ -4,27 +4,26 @@ namespace MarsRover
 {
     public class Rover
     {
+        public PositionValidator PositionValidator;
         public Position Position { get; set; }
-
-        public Rover()
-        {
-		}
 
 	    public Rover(int xCoordinate, int yCoordinate, char heading)
 	    {
-		    if (xCoordinate < 0)
-			    throw new ArgumentException("xCoordinate must not be less than 0");
-            if (yCoordinate < 0)
-                throw new ArgumentException("yCoordinate must not be less than 0");
-            if (heading != 'N' || heading != 'S' || heading != 'E' || heading != 'W')
-                throw new ArgumentException("heading must be N, S, E or W");
+            PositionValidator = new PositionValidator();
+            var isValid = PositionValidator.ValidatePosition(xCoordinate, yCoordinate, heading);
 
-		    Position = new Position{ X = xCoordinate, Y = yCoordinate, Heading = heading };
+            if (isValid)
+            {
+		        Position = new Position{ X = xCoordinate, Y = yCoordinate, Heading = heading };
+            }
 	    }
 
-	    public Position PerformInstructions(string s)
+	    public void PerformInstructions(char instruction)
 	    {
-		    throw new NotImplementedException();
+            if (instruction == 'M')
+            {
+                Position.Y++;
+            }
 	    }
     }
 
