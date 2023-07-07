@@ -28,11 +28,25 @@ namespace MarsRover.UnitTests
             Assert.That(rover.Position, Is.Not.Null);
         }
 
-        [Test]
-        public void Throw_Argument_Exception_If_Position_Out_Of_Range()
+        [TestCase(-1, 0, 'N')]
+        [TestCase(1, -1, 'N')]
+        [TestCase(1, 1, 'Z')]
+        public void Throw_Argument_Exception_If_Position_Out_Of_Range(int xCoordinate, int yCoordinate, char heading)
         {
-            Assert.Throws<ArgumentException>(() => new Rover(-1, 0, 'N'));
+            Assert.Throws<ArgumentException>(() => new Rover(xCoordinate, yCoordinate, heading));
         }
 
-    }
+        [Test]
+        public void Move_Forward()
+        {
+	        var rover = new Rover(0, 0, 'N');
+
+	        var position = rover.PerformInstructions("M");
+
+            Assert.That(position.X, Is.EqualTo(0));
+            Assert.That(position.Y, Is.EqualTo(1));
+            Assert.That(position.Heading, Is.EqualTo('N'));
+        }
+
+	}
 }

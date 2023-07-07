@@ -11,12 +11,21 @@ namespace MarsRover
 		}
 
 	    public Rover(int xCoordinate, int yCoordinate, char heading)
-        {
-            Position = new Position();
-            Position.X = xCoordinate;
-            Position.Y = yCoordinate;
-            Position.Heading = heading;
-        }
+	    {
+		    if (xCoordinate < 0)
+			    throw new ArgumentException("xCoordinate must not be less than 0");
+            if (yCoordinate < 0)
+                throw new ArgumentException("yCoordinate must not be less than 0");
+            if (heading != 'N' || heading != 'S' || heading != 'E' || heading != 'W')
+                throw new ArgumentException("heading must be N, S, E or W");
+
+		    Position = new Position{ X = xCoordinate, Y = yCoordinate, Heading = heading };
+	    }
+
+	    public Position PerformInstructions(string s)
+	    {
+		    throw new NotImplementedException();
+	    }
     }
 
     public class Position
