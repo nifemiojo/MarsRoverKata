@@ -18,12 +18,17 @@ namespace MarsRover
             }
 	    }
 
-	    public void PerformInstructions(char instruction)
+	    public void PerformInstruction(char instruction)
 	    {
             if (instruction == 'M')
             {
                 Position.Y++;
             }
+
+            if (instruction == 'R')
+            {
+				Position.Heading = 'E';
+			}
 	    }
     }
 

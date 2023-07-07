@@ -41,11 +41,23 @@ namespace MarsRover.UnitTests
         {
 	        var rover = new Rover(0, 0, 'N');
 
-	        rover.PerformInstructions('M');
+	        rover.PerformInstruction('M');
 
             Assert.That(rover.Position.X, Is.EqualTo(0));
             Assert.That(rover.Position.Y, Is.EqualTo(1));
             Assert.That(rover.Position.Heading, Is.EqualTo('N'));
+        }
+        
+        [Test]
+        public void Move_Forward_With_Different_Heading()
+        {
+	        var rover = new Rover(2, 2, 'E');
+
+	        rover.PerformInstruction('M');
+
+            Assert.That(rover.Position.X, Is.EqualTo(3));
+            Assert.That(rover.Position.Y, Is.EqualTo(2));
+            Assert.That(rover.Position.Heading, Is.EqualTo('E'));
         }
 
         
@@ -54,7 +66,7 @@ namespace MarsRover.UnitTests
         {
 	        var rover = new Rover(0, 0, 'N');
 
-	        rover.PerformInstructions('R');
+	        rover.PerformInstruction('R');
 
             Assert.That(rover.Position.X, Is.EqualTo(0));
             Assert.That(rover.Position.Y, Is.EqualTo(0));
