@@ -18,11 +18,31 @@ namespace MarsRover
             }
 	    }
 
+        public void Move()
+        {
+            switch (Position.Heading)
+            {
+                case 'N':
+                    Position.Y++;
+                    break;
+                case 'E':
+                    Position.X++;
+                    break;
+                case 'S':
+                    Position.Y--;
+                    break;
+                case 'W':
+                    Position.X--;
+                    break;
+            }
+        }
+
 	    public void PerformInstruction(char instruction)
 	    {
+            
             if (instruction == 'M')
             {
-                Position.Y++;
+                Move();
             }
 
             if (instruction == 'R')

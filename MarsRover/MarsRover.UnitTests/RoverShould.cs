@@ -36,30 +36,20 @@ namespace MarsRover.UnitTests
             Assert.Throws<ArgumentException>(() => new Rover(xCoordinate, yCoordinate, heading));
         }
 
-        [Test]
-        public void Move_Forward()
+        [TestCase(0, 0, 'N', 0, 1, 'N')]
+        [TestCase(2, 2, 'E', 3, 2, 'E')]
+        [TestCase(4, 4, 'S', 4, 3, 'S')]
+        [TestCase(4, 4, 'W', 3, 4, 'W')]
+        public void Move_Forward_Instruction_Works_With_Any_Heading(int xCoordinate, int yCoordinate, char heading, int expectedXCoordinate, int expectedYCoordinate, char expectedHeading)
         {
-	        var rover = new Rover(0, 0, 'N');
+            var rover = new Rover(xCoordinate, yCoordinate, heading);
 
-	        rover.PerformInstruction('M');
+            rover.PerformInstruction('M');
 
-            Assert.That(rover.Position.X, Is.EqualTo(0));
-            Assert.That(rover.Position.Y, Is.EqualTo(1));
-            Assert.That(rover.Position.Heading, Is.EqualTo('N'));
+            Assert.That(rover.Position.X, Is.EqualTo(expectedXCoordinate));
+            Assert.That(rover.Position.Y, Is.EqualTo(expectedYCoordinate));
+            Assert.That(rover.Position.Heading, Is.EqualTo(expectedHeading));
         }
-        
-        [Test]
-        public void Move_Forward_With_Different_Heading()
-        {
-	        var rover = new Rover(2, 2, 'E');
-
-	        rover.PerformInstruction('M');
-
-            Assert.That(rover.Position.X, Is.EqualTo(3));
-            Assert.That(rover.Position.Y, Is.EqualTo(2));
-            Assert.That(rover.Position.Heading, Is.EqualTo('E'));
-        }
-
         
         [Test]
         public void Change_Heading_Direction_R()
@@ -73,5 +63,18 @@ namespace MarsRover.UnitTests
             Assert.That(rover.Position.Heading, Is.EqualTo('E'));
         }
 
-	}
+
+        [Test]
+        public void Change_Heading_Direction_L()
+        {
+            var rover = new Rover(0, 0, 'N');
+
+            rover.PerformInstruction('L');
+
+            Assert.That(rover.Position.X, Is.EqualTo(0));
+            Assert.That(rover.Position.Y, Is.EqualTo(0));
+            Assert.That(rover.Position.Heading, Is.EqualTo('W'));
+        }
+
+    }
 }
